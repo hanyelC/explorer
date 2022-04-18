@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avaliação</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Staatliches&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>AVALIE A SUA MENTORIA</h1>
+    <P>Chegou a hora de avaliar o seu mentor. Bora lá?</P>
+    <img src="./img1.svg" alt="balão de fala com 5 estrelas em linha, representando uma avaloação">
+    <div>
+      <h2>INFORMAÇÕES PESSOAIS</h2>
+    </div>
+  </header>
+
+  <form action="#">
+
+    <section>
+      <div class="flex">
+        <div class="col">
+          <label for="name">Nome</label>
+          <input class="input-wrapper mid-input" type="text" name="name" id="name" required>
+        </div>
+
+        <div class="col">
+          <label for="lastName">Sobrenome</label>
+          <input class="input-wrapper mid-input" type="text" name="lastName" id="lastName" required>
+        </div>
+      </div>
+      <label for="email">Email <span>(digite um email válido)</span></label>
+      <input class="input-wrapper" type="email" name="email" id="email" required>
+    </section>
+
+    <section class="col">
+      <h2>INFORMAÇÕES DO MENTOR</h2>
+
+      <div class="divider"></div>
+
+      <label for="select">Selecione quem foi o se mentor</label>
+      <select name="select" id="select" class="input-wrapper mid-input" required>
+        <option value=""></option>
+        <option value="Mayk">Maykão</option>
+      </select>
+
+      <label for="feedback">Feedback sobre o mentor</label>
+      <textarea name="feedback" id="feedback" class="input-wrapper" required></textarea>
+
+      <div class="checkbox-area">
+        <input class="input-wrapper" type="checkbox" name="check" id="check">
+        <label for="check" id="checkbox-label">Todas as minhas dúvidas foram esclarecidas durante a mentoria</label>
+      </div>
+    </section>
+
+    <section>
+      <h2>AGENDANDO PRÓXIMA MENTORIA</h2>
+
+      <div class="divider"></div>
+
+      <div class="flex">
+        <div class="col">
+          <label for="firstMentoringDate">Data <span>(DD/MM/AAAA)</span></label>
+          <input class="input-wrapper mid-input" type="date" name="firstMentoringDate" id="firstMentoringDate">
+        </div>
+
+        <div class="col">
+          <label for="firstMentoringInit">Das</label>
+          <input class="input-wrapper small-input" type="time" name="firstMentoringInit" id="firstMentoringInit">
+        </div>
+        <div class="col col-3">
+          <label for="firstMentoringEnd">Até</label>
+          <input class="input-wrapper small-input" type="time" name="firstMentoringEnd" id="firstMentoringEnd" >
+        </div>
+    </section>
+
+    <input type="submit" value="SALVAR">
+  </form>
+</body>
+
+</html>

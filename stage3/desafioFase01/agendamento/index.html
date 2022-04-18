@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&family=Staatliches&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="bgHeader"></div>
+
+  <div class="page">
+    <header>
+      <h1>MENTORIA</h1>
+      <p>Preencha o formulário abaixo para agendar a sua mentoria</p>
+    </header>
+
+
+    <form id="form">
+      <section>
+        <h2>INFORMAÇÕES PESSOAIS</h2>
+
+        <div class="divider"></div>
+
+        <div class="flex">
+          <div class="col">
+            <label for="name">Nome</label>
+            <input class="input-wrapper mid-input" type="text" name="name" id="name" required>
+          </div>
+
+          <div class="col">
+            <label for="lastName">Sobrenome</label>
+            <input class="input-wrapper mid-input" type="text" name="lastName" id="lastName" required>
+          </div>
+        </div>
+
+        <label for="email">Email <span>(digite um email válido)</span></label>
+        <input class="input-wrapper" type="email" name="email" id="email" required>
+
+        <label for="password">Senha <span>(mínimo de 6 caracteres)</span></label>
+        <input class="input-wrapper" type="password" name="password" id="password" required>
+      </section>
+
+      <section>
+        <h2>INFORMAÇÕES DO MENTOR</h2>
+
+        <div class="divider"></div>
+
+        <label for="mentorName">Nome do seu mentor <span>(só o primeiro nome)<span></label>
+        <input class="input-wrapper" type="text" name="mentorName" id="mentorName" required>
+      </section>
+      <section>
+        <h2>SEUS HORÁRIOS DISPONÍVEIS</h2>
+
+        <div class="divider"></div>
+
+        <h3>PRIMEIRA MENTORIA</h3>
+        <div class="flex">
+          <div class="col">
+            <label for="firstMentoringDate">Data <span>(DD/MM/AAAA)</span></label>
+            <input class="input-wrapper mid-input" type="date" name="firstMentoringDate" id="firstMentoringDate"
+              required>
+          </div>
+
+          <div class="col">
+            <label for="firstMentoringInit">Das</label>
+            <input class="input-wrapper small-input" type="time" name="firstMentoringInit" id="firstMentoringInit"
+              required>
+          </div>
+          <div class="col col-3">
+            <label for="firstMentoringEnd">Até</label>
+            <input class="input-wrapper small-input" type="time" name="firstMentoringEnd" id="firstMentoringEnd"
+              required>
+          </div>
+        </div>
+        <h3>SEGUNDA MENTORIA</h3>
+
+        <div class="flex">
+          <div class="col">
+            <label for="secondMentoringDate">Data <span>(DD/MM/AAAA)</span></label>
+            <input class="input-wrapper mid-input" type="date" name="secondMentoringDate" id="secondMentoringDate"
+              required>
+          </div>
+
+          <div class="col">
+            <label for="secondMentoringInit">Das</label>
+            <input class="input-wrapper small-input" type="time" name="secondMentoringInit" id="secondMentoringInit"
+              required>
+          </div>
+
+          <div class="col col-3">
+            <label for="secondMentoringEnd">Até</label>
+            <input class="input-wrapper small-input" type="time" name="secondMentoringEnd" id="secondMentoringEnd"
+              required>
+          </div>
+        </div>
+      </section>
+    </form>
+
+    <div class="btnArea">
+      <button type="submit" form="form">SALVAR</button>
+    </div>
+
+  </div>
+</body>
+
+</html>

@@ -1,31 +1,48 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
   font-size: 62.5%;
   --ff-headers: 'Staatliches', cursive;
   --ff-p: 'Palanquin', sans-serif;
+  --ff-footer: 'Open Sans', sans-serif;
 }
 
 body {
   background-color: #EFF1FF;
 }
 
-header {
+#background-header {
   background-color: #8E9AAF;
-  text-align: center;
-  padding-top: 3.2rem;
-  padding-bottom: 3.6rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  height: 30.8rem;
 }
 
-header > div {
+header {
+  margin: 0 auto;
+  max-width: 384px;
+  text-align: center;
+  padding-top: 3.2rem;
+}
+
+header img {
+  filter: drop-shadow(0px 6px 6px rgba(0, 0, 0, 0.25));
+}
+
+#title-div {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  margin-top: 4rem;
+
+  margin-top: 3.2rem;
+  margin-bottom: 4.3rem;
 
   width: 100%;
   height: 4.9rem;
@@ -47,19 +64,25 @@ main {
   flex-direction: column;
   align-items: center;
 }
+
+main div img {
+  border-radius: 20px;
+}
+
 .wrapper {
   max-width: 384px;
   margin: 1.4rem 3.2rem 2.5rem;
 }
 
 p {
+  max-width: 305px;
   font-family: var(--ff-p);
   font-weight: 400;
   font-size: 2rem;
   line-height: 2.5rem;
   color: #23053A;
 
-  margin: 0 4px 6.3rem;
+  margin: 0 auto 6.3rem;
 }
 
 .category {
@@ -88,23 +111,33 @@ h2 {
   letter-spacing: 0.05em;
 }
 
-.wrapper div > img {
+.wrapper div>img {
   width: 100%;
   opacity: 0;
   animation: down-top 1s 1s forwards;
 }
 
-.wrapper div {
+.mb-35 {
   margin-bottom: 3.5rem;
-}
-
-.paletas {
-  background-image: url("./assets/sorvete1.png");
-  border-radius: 20px;
 }
 
 .display-relative {
   position: relative;
+}
+
+footer p {
+  display: none;
+  font-family: var(--ff-footer);
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.8rem;
+  color: #4A4E69;
+}
+
+footer p a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #4A4E69;
 }
 
 @keyframes top-down {
@@ -112,7 +145,7 @@ h2 {
     opacity: 0;
     transform: translateY(-25px)
   }
-  
+
   100% {
     opacity: 1;
     transform: translateY(0)
@@ -124,9 +157,119 @@ h2 {
     opacity: 0;
     transform: translateY(25px)
   }
-  
+
   100% {
     opacity: 1;
     transform: translateY(0)
+  }
+}
+
+
+
+@media (min-width: 900px) {
+  body {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 100vh;
+  }
+
+  header {
+    max-width: 380px;
+    height: 100%;
+    margin: 0;
+    background-color: #8E9AAF;
+  }
+
+  #background-header {
+    background-color: none;
+  }
+
+  header p {
+    color: #FFF;
+    margin: 0 50px 0;
+    font-size: 2.4rem;
+  }
+
+  main {
+    width: 100%;
+    padding: 6.4rem 8.5rem 5rem;
+  }
+
+
+  .wrapper {
+    display: grid;
+    max-width: 100%;
+    width: 100%;
+
+    gap: 3.2rem;
+    grid-template-areas:
+      "a b"
+      "d b"
+      "d c"
+      "e f"
+  }
+
+  .display-relative {
+    margin: 0;
+  }
+
+  #paletas,
+  #shakes,
+  #massas,
+  #picoles,
+  #picoles,
+  #zero,
+  #sorvete {
+    display: flex;
+    align-items: flex-start;
+    max-width: 30rem;
+    min-width: 220px;
+  }
+
+  .wrapper>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #paletas {
+    grid-area: a;
+  }
+
+  #shakes {
+    grid-area: b;
+  }
+
+  #massas {
+    grid-area: c;
+  }
+
+  #picoles {
+    grid-area: d;
+  }
+
+  #zero {
+    grid-area: e;
+  }
+
+  #sorvete {
+    grid-area: f;
+  }
+
+  .wrapper div {
+    max-width: 30rem;
+  }
+
+  footer p {
+    display: block;
+  }
+}
+
+@media (min-width: 1150px) {
+  .wrapper {
+    grid-template-areas:
+      "a b  e"
+      "d b  f"
+      "d c  f"
   }
 }

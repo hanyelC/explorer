@@ -11,12 +11,9 @@ const timerDisplay = document.querySelector('.difference')
 let minutesDisplay = document.querySelector('.minutes-display')
 let secondsDisplay = document.querySelector('.seconds-display')
 
-let minutesInputTime = prompt('tempo em minutos')
-let minutesTime = Number(minutesInputTime)
-let msTime = minutesTime * 60 * 1000
-
-// let minutesInputTime = Number(minutesInput.value)
-// let secondsInputTime = Number(secondsInput.value)
+let minutesInputTime = Number(minutesInput.value)
+let secondsInputTime = Number(secondsInput.value)
+let msTime = (minutesInputTime * 60 * 1000) + secondsInputTime * 1000
 
 const Cafeteria = new Audio('./assets/audios/Cafeteria.wav')
 const Chuva = new Audio('./assets/audios/Chuva.wav')
@@ -75,6 +72,12 @@ function displayTimer() {
   document.querySelector('.input-time').classList.add('hidden')
 }
 
+function displayInput(){
+  console.log('clique')
+  timerDisplay.classList.add('hidden')
+  document.querySelector('.input-time').classList.remove('hidden')
+}
+
 function attTimerDisplay() {
   let formattedTiming = formatTime(msTime)
 
@@ -83,6 +86,15 @@ function attTimerDisplay() {
 }
 
 buttonPlay.addEventListener('click', () => {
+  minutesInputTime = Number(minutesInput.value)
+  secondsInputTime = Number(secondsInput.value)
+  msTime = (minutesInputTime * 60 * 1000) + secondsInputTime * 1000
+  
+  if(isNaN(msTime) || msTime <= 0){
+    alert('Insira um tempo válido')
+    return
+  }
+  
   buttonPlay.classList.add('hidden')
   buttonPause.classList.remove('hidden')
   countdown()
@@ -101,8 +113,9 @@ buttonStop.addEventListener('click', () => {
   buttonPlay.classList.remove('hidden')
   clearTimeout(timerTimeout)
   countdown('stop')
-  msTime = minutesTime * 60 * 1000
-  attTimerDisplay(formatTime(msTime))
+  // attTimerDisplay(formatTime(msTime))
+
+  displayInput()
 })
 
 buttonPlus.addEventListener('click', () => {

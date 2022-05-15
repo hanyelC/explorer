@@ -73,7 +73,6 @@ function displayTimer() {
 }
 
 function displayInput(){
-  console.log('clique')
   timerDisplay.classList.add('hidden')
   document.querySelector('.input-time').classList.remove('hidden')
 }
@@ -94,7 +93,7 @@ buttonPlay.addEventListener('click', () => {
     alert('Insira um tempo válido')
     return
   }
-  
+
   buttonPlay.classList.add('hidden')
   buttonPause.classList.remove('hidden')
   countdown()
@@ -113,7 +112,6 @@ buttonStop.addEventListener('click', () => {
   buttonPlay.classList.remove('hidden')
   clearTimeout(timerTimeout)
   countdown('stop')
-  // attTimerDisplay(formatTime(msTime))
 
   displayInput()
 })

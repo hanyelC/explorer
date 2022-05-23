@@ -23,7 +23,7 @@ class NotesController {
 
     const { title, description, rating, user_id, tags } = req.body
 
-    if (rating.toString())
+    if (!rating.toString())
       throw new AppError("Avalie o filme com uma nota de 1 a 5")
     else if (rating < 1 || rating > 5) 
         throw new AppError("Nota inválida forneça um valor de 1 a 5")

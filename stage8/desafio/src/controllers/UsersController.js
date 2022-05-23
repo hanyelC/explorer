@@ -1,17 +1,65 @@
+const sqliteConnection = require("../database/sqlite")
+const AppError = require("../utils/AppError")
+
 class UsersController {
   async create(req, res) {
+    const db = await sqliteConnection()
+
     const { name, email, password, avatar } = req.body
 
-    //Salvar usuário no banco de dados
+    const checkIfUserExists = await db.get("SELECT * FROM users WHERE email = (?)", [email])
+
+    if (checkIfUserExists) {
+      await db.close()
+      throw new AppError("Email já cadastrado")
+    }
+
+    await db.run("INSERT INTO users (name, email, password, avatar) VALUES (?,?,?,?)", [name, email, password, avatar])
+    await db.close()
 
     return res.status(201).json()
   }
 
   async update(req, res) {
-    const { user_id } = req.params
-    const { name, email, password, avatar } = req.body
+    const db = await sqliteConnection()
 
-    //Atualizar dados do usuário no banco de dados
+    const { name, email, password, avatar, old_password } = req.body
+    const { id } = req.params
+
+    const user = await db.get("SELECT * FROM users WHERE id = (?)", [id])
+
+    if (!user) {
+      await db.close()
+      throw new AppError("Usuário não encontrado")
+    }
+
+    const userWithNewEmail = await db.get("SELECT * FROM users WHERE email = (?)", [email])
+
+    if (userWithNewEmail) {
+      await db.close()
+      throw new AppError("Email já está em uso")
+    }
+
+    if (password && !old_password) {
+      await db.close()
+      throw new AppError("Você precisa informar a senha antiga para alterar a sua senha")
+    }
+
+    const checkPasswordMatch = old_password === user.password
+
+    if (password && !checkPasswordMatch) {
+      await db.close()
+      throw new AppError("A senha antiga não confere")
+    } else {
+      user.password = password ?? user.password
+    }
+
+    user.name = name ?? user.name
+    user.email = email ?? user.email
+    user.avatar = avatar ?? user.avatar
+
+    await db.run("UPDATE users SET name = ?, email = ?, password = ?, avatar = ?, updated_at = DATETIME('now')  WHERE id = ?", [user.name, user.email, user.password, user.avatar, id])
+    await db.close()
 
 
     return res.json()

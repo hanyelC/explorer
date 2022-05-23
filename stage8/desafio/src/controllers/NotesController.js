@@ -91,6 +91,8 @@ class NotesController {
 
     await db.run("DELETE FROM notes WHERE id = (?)", [note_id])
 
+    await db.run("DELETE FROM tags WHERE note_id = (?)", [note_id])
+
     return res.status(200).json()
   }
 }

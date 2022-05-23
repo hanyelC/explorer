@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs')
 const sqliteConnection = require("../database/sqlite")
 const AppError = require("../utils/AppError")
 
@@ -14,7 +15,9 @@ class UsersController {
       throw new AppError("Email já cadastrado")
     }
 
-    await db.run("INSERT INTO users (name, email, password, avatar) VALUES (?,?,?,?)", [name, email, password, avatar])
+    const hashedPassword = bcrypt.hashSync(password, 8)
+
+    await db.run("INSERT INTO users (name, email, password, avatar) VALUES (?,?,?,?)", [name, email, hashedPassword, avatar])
     await db.close()
 
     return res.status(201).json()
@@ -35,7 +38,7 @@ class UsersController {
 
     const userWithNewEmail = await db.get("SELECT * FROM users WHERE email = (?)", [email])
 
-    if (userWithNewEmail) {
+    if (userWithNewEmail && userWithNewEmail.id === id) {
       await db.close()
       throw new AppError("Email já está em uso")
     }
@@ -45,13 +48,14 @@ class UsersController {
       throw new AppError("Você precisa informar a senha antiga para alterar a sua senha")
     }
 
-    const checkPasswordMatch = old_password === user.password
+    let checkPasswordMatch
+    if(password) checkPasswordMatch = bcrypt.compareSync(old_password, user.password)
 
     if (password && !checkPasswordMatch) {
       await db.close()
       throw new AppError("A senha antiga não confere")
     } else {
-      user.password = password ?? user.password
+      user.password = password ? bcrypt.hashSync(password, 8) : user.password
     }
 
     user.name = name ?? user.name

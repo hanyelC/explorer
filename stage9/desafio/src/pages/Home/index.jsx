@@ -20,7 +20,7 @@ export function Home() {
 
       <Notes>
 
-        <Note title="title" description="lorem ipsum" rating={4} tags={["Ação", "aventura"]}/>
+        <Note title="Interestellar" description="  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus consequuntur dolorem aperiam aliquid suscipit ratione. Repellat totam, delectus perspiciatis aspernatur, accusantium nisi officiis et alias nesciunt similique ratione in accusamus.Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus consequuntur dolorem aperiam aliquid suscipit ratione. Repellat totam, delectus perspiciatis aspernatur, accusantium nisi officiis et alias nesciunt similique ratione in accusamus.lorem ipsum" rating={4} tags={["Ação", "aventura"]}/>
         <Note title="title" description="lorem ipsum" rating={4} tags={["Ação", "aventura"]}/>
         <Note title="title" description="lorem ipsum" rating={4} tags={["Ação", "aventura"]}/>
         <Note title="title" description="lorem ipsum" rating={4} tags={["Ação", "aventura"]}/>

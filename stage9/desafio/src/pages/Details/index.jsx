@@ -14,7 +14,7 @@ export function Details() {
 
       <Content>
         <header>
-          <ButtonText icon={FiArrowLeft} title="Voltar" />
+          <ButtonText icon={FiArrowLeft} title="Voltar" to="#" />
 
           <div>
             <h2>Interestelar</h2>

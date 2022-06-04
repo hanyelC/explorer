@@ -6,6 +6,7 @@ export const theme = {
 
     PINK: "#FF859B",
     PINK_DARK: "rgba(255, 133, 155, 0.05)",
+    PINK_HOVER: "rgba(255, 133, 155, 0.8)",
 
     WHITE: "#F4EDE8",
     GRAY_LIGHT: "#CAC4CF",

@@ -19,6 +19,8 @@ export const Content = styled.div`
   gap: 4rem;
   margin: 4rem 11.5rem;
 
+  padding-right: 2.4rem;
+  
   text-align: justify;
 
   overflow-y: auto;

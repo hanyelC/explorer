@@ -1,17 +1,28 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-  
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+  "header"
+  "content";
+ 
+ overflow: hidden;
+ gap: 4rem;
 `
 
 export const Content = styled.form`
-  margin: 4rem auto;
+  grid-area: content;
 
+  justify-self: center;
+
+  width: 100%;
   max-width: 1140px;
   
-  padding: 0 2.4rem 1.6rem 0;
+  padding: 0 2.4rem 4rem 0;
 
-  overflow-y: auto;
+  overflow-y: scroll;
 
   display: flex;
   flex-direction: column;

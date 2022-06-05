@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export const Container = styled.a`
+export const Container = styled(Link)`
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 2.1rem;
@@ -15,8 +16,4 @@ export const Container = styled.a`
   & > svg {
     margin-right: 8px;
   }
-`
-
-export const Link = styled.a`
-
 `

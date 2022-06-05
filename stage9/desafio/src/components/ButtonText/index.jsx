@@ -1,8 +1,8 @@
-import { Container, Link } from "./styles"
+import { Container } from "./styles"
 
 export function ButtonText({ title, icon:Icon, to, ...rest}) {
   return (
-    <Container href={to} {...rest}>
+    <Container to={to} {...rest}>
       
       {Icon && <Icon /> }
       

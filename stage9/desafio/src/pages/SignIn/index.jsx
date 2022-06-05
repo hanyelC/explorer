@@ -28,7 +28,7 @@ export function SignIn() {
 
         <Button title="Entrar" />
 
-        <ButtonText to="#" title="Criar conta" />
+        <ButtonText to="/register" title="Criar conta" />
       </Form>
 
       <Background />

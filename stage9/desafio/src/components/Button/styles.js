@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 import styled from "styled-components"
 
 export const Container = styled.button`
@@ -7,6 +9,7 @@ export const Container = styled.button`
   font-weight: 500;
   font-size: 1.6rem;
 
+  padding: 0 3.2rem;
   display: flex;
   align-items: center;
   justify-content: center;  

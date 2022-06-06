@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 
-export const Container = styled.div`
+export const Container = styled(Link)`
   width: 100%;
 
   padding: 3.2rem;
@@ -8,8 +9,9 @@ export const Container = styled.div`
   border-radius: 16px;
   
   background-color: ${({ theme }) => theme.COLORS.PINK_DARK};
-
+  
   & > h3 {
+    color: ${({ theme }) => theme.COLORS.WHITE};
     font-weight: 700;
     font-size: 2.4rem;
     line-height: 3.2rem;
@@ -17,6 +19,7 @@ export const Container = styled.div`
   }
 
   & > p {
+  color: ${({ theme }) => theme.COLORS.GRAY_DARK};
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;

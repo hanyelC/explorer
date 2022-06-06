@@ -8,14 +8,14 @@ import { Button } from "../../components/Button"
 
 import { Container, Content, Tags, Tag } from "./styles"
 
-export function CreateNote() {
+export function New() {
   return (
     <Container>
       <Header />
 
       <Content>
         <header>
-          <ButtonText icon={FiArrowLeft} title="Voltar" />
+          <ButtonText to="/" icon={FiArrowLeft} title="Voltar" />
           <h2>Novo filme</h2>
         </header>
 

@@ -65,6 +65,7 @@ export const Info = styled.div`
 
   align-items: center;
 
+  font-family: 'Roboto', sans-serif;
   font-size: 1.6rem;
 
   & > img {

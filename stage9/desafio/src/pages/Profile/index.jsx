@@ -9,7 +9,7 @@ import { Container, Form, Avatar } from "./styles"
 export function Profile() {
   return (
     <Container>
-      <header><ButtonText icon={FiArrowLeft} title="Voltar" to="home" /></header>
+      <header><ButtonText icon={FiArrowLeft} title="Voltar" to="/" /></header>
 
       <Avatar>
         <img src="https://github.com/hanyelc.png" alt="foto usuário" />

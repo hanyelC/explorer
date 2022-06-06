@@ -23,8 +23,10 @@ export const Container = styled.div`
       line-height: 4.2rem;
     }
     
-    & > button {
-      max-width: 207px;
+    & button {
+      background-color: blue;
+      margin: 3.2rem;
+      width: 207px;
     }
   }
 `

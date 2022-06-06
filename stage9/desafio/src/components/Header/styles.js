@@ -16,7 +16,9 @@ export const Container = styled.div`
   gap: 6.4rem;
   padding: 2.4rem 12.3rem;
 
-  & > h1 {
+  & > a > h1 {
+    font-weight: 700;
+    font-size: 2.4rem;
     color: ${({ theme }) => theme.COLORS.PINK};
   }
   

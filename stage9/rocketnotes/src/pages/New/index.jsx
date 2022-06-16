@@ -1,6 +1,10 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
+
+
 import { Header } from "../../components/Header"
 import { Input } from "../../components/Input"
 import { TextArea } from "../../components/TextArea"
@@ -12,21 +16,22 @@ import { api } from "../../services/api"
 
 import { Container, Form } from "./styles"
 
+const swal = withReactContent(Swal)
 
 export function New() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
-  
+
   const [links, setLinks] = useState([])
   const [newLink, setNewLink] = useState("")
-  
+
   const [tags, setTags] = useState([])
   const [newTag, setNewTag] = useState("")
 
   const navigate = useNavigate()
-  
+
   function handleAddLink() {
-    setLinks(prevState => [...prevState, newLink])
+    if (newLink.trim()) setLinks(prevState => [...prevState, newLink.trim()])
     setNewLink("")
   }
 
@@ -35,7 +40,7 @@ export function New() {
   }
 
   function handleAddTag() {
-    setTags(prevState => [...prevState, newTag])
+    if (newTag.trim()) setTags(prevState => [...prevState, newTag.trim()])
     setNewTag("")
   }
 
@@ -44,16 +49,41 @@ export function New() {
   }
 
   async function handleNewNote() {
-    if(newLink) {
-      if(window.confirm("Você deixou um link sem confirmação, deseja salvá-lo?")) handleAddLink()
-      else setNewLink("")
-      return
+    if (!title) {
+      return swal.fire({
+        icon: "warning",
+        title: "Preencha o título"
+      })
     }
 
-    if(newTag) {
-      if(window.confirm("Você deixou uma tag sem confirmação, deseja salvá-la?")) handleAddTag()
-      else setNewTag("")
-      return
+    if (newLink) {
+      return swal.fire({
+        icon: "warning",
+        title: "Você deixou um link sem confirmação, deseja salvá-lo?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Salvar",
+        denyButtonText: "Não salvar",
+        cancelButtonText: "Cancelar"
+      }).then(result => {
+        if (result.isConfirmed) handleAddLink()
+        if (result.isDenied) setNewLink("")
+      })
+    }
+
+    if (newTag) {
+      return swal.fire({
+        icon: "warning",
+        title: "Você deixou uma tag sem confirmação, deseja salvá-la?",
+        showCancelButton: true,
+        showDenyButton: true,
+        confirmButtonText: "Salvar",
+        denyButtonText: "Não salvar",
+        cancelButtonText: "Cancelar"
+      }).then(result => {
+        if (result.isConfirmed) handleAddTag()
+        if (result.isDenied) setNewTag("")
+      })
     }
 
     try {
@@ -63,16 +93,25 @@ export function New() {
         tags,
         links
       })
-      
-      alert("Nota criada com sucesso!")
-  
-      navigate("/")
+
+      await swal.fire({
+        icon: "success",
+        title: "Nota criada com sucesso!",
+        timer: 2000,
+        timerProgressBar: true
+      }).then(() => navigate("/"))
+
 
     } catch (error) {
-      
-      if(error.response) alert(error.response.data.message)
+
+      if (error.response) {
+        swal.fire({
+          icon: "error",
+          title: `${error.response.data.message}`
+        })
+      }
     }
-    
+
 
   }
 
@@ -120,7 +159,7 @@ export function New() {
           <Section title="Marcadores">
             <div className="tags">
               {
-                tags.map((tag,index) => (
+                tags.map((tag, index) => (
                   <NoteItem
                     key={String(index)}
                     value={tag}
@@ -132,8 +171,8 @@ export function New() {
               <NoteItem
                 isNew
                 value={newTag}
-                onChange={e=> setNewTag(e.target.value)}
-                onClick={handleAddTag}  
+                onChange={e => setNewTag(e.target.value)}
+                onClick={handleAddTag}
                 placeholder="Nova tag"
               />
             </div>

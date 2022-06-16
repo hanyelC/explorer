@@ -1,8 +1,13 @@
 import { createContext, useContext, useState, useEffect } from "react"
 
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
+
 import { api } from "../services/api"
 
 const AuthContext = createContext({})
+
+  const swal = withReactContent(Swal)
 
 export function AuthProvider({ children }) {
   const [data, setData] = useState({})
@@ -56,7 +61,12 @@ export function AuthProvider({ children }) {
       
       setData({ user, token: data.token})
       
-      alert("Perfil atualizado")
+      await swal.fire({
+        icon: "success",
+        title: "Perfil atualizado",
+        timer: 2000,
+        timerProgressBar: true
+      })
       
     } catch (error) {
       if (error.response) alert(error.response.data.message)

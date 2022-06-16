@@ -6,6 +6,8 @@ class NotesController {
     const { title, description, tags, links } = req.body
     const user_id = req.user.id
 
+    if(!title) throw new AppError("O título é obrigatório")
+
     const note_id = await knex("notes").insert({
       title,
       description,

@@ -2,7 +2,7 @@ import { FiPlus, FiX } from "react-icons/fi"
 
 import { Container } from "./styles"
 
-export function NoteItem({ isNew, value, onClick, ...rest }) {
+export function NoteItem({ isNew, value, placeholder, onClick, ...rest }) {
   return (
     <Container isNew={isNew} >
       <input
@@ -10,7 +10,7 @@ export function NoteItem({ isNew, value, onClick, ...rest }) {
         value={value}
         readOnly={!isNew}
         {...rest}
-        placeholder={ isNew ? "Novo" : ""}
+        placeholder={isNew ? placeholder ? placeholder : "Novo" : ""}
       />
 
       <button

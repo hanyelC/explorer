@@ -9,7 +9,7 @@ const notesController = new NotesController()
 
 notesRoutes.use(ensureAuthenticated)
 
-notesRoutes.get('/',ensureAuthenticated, notesController.index)
+notesRoutes.get('/', notesController.index)
 notesRoutes.post('/', notesController.create)
 notesRoutes.get('/:id', notesController.read)
 notesRoutes.delete('/:id', notesController.delete)

@@ -2,6 +2,9 @@ import { useState, useEffect } from "react"
 
 import { FiPlus, FiSearch } from 'react-icons/fi'
 
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
 import { Container, Brand, Menu, Search, Content, NewNote } from "./styles"
 
 import { Header } from "../../components/Header"
@@ -19,13 +22,14 @@ export function Home() {
   const [tagsSelected, setTagsSelected] = useState([])
   const [notes, setNotes] = useState([])
 
+  const swal = withReactContent(Swal)
+  
   function handleTagSelected(tagName) {
     if(tagName === "all3333039w8asiupghsacidfhazzzusoihdefdsfohiccc"){
       return setTagsSelected([])
     }
-    
+
     const alreadySelected = tagsSelected.includes(tagName)
-    console.log(alreadySelected)
 
     if(alreadySelected) {
       const filteredTags = tagsSelected.filter(tag => tag !== tagName)
@@ -36,7 +40,7 @@ export function Home() {
 
 
   }
-  
+
   useEffect(() => {
     async function fetchTags() {
       const token = localStorage.getItem("@rocketnotes:token")
@@ -52,16 +56,30 @@ export function Home() {
     
     fetchTags()
   }, [])
-  
+
   useEffect(() => {
     async function fetchNotes() {
-      const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`)
-      setNotes(response.data)
+      try {
+        const response = await api.get(`/notes?title=${search}&tags=${tagsSelected}`)
+        setNotes(response.data)
+      } catch (error) {
+        if(error.response) {
+          swal.fire({
+            icon: "error",
+            title: error.response.data.message
+          })
+        } else {
+          swal.fire({
+            icon: "error",
+            title: "Ops! Algo deu errado"
+          })
+        }
+      }
     }
 
     fetchNotes()
   }, [tagsSelected, search])
-  
+
   return (
     <Container>
       <Brand>

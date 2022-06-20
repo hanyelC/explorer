@@ -4,9 +4,9 @@ class TagsController {
   async index(req, res) {
     const db = await sqliteConnection()
 
-    const { user_id } = req.params
+    const { user_id } = req.body
     
-    const tags = await db.get("SELECT * FROM tags WHERE id = (?)",[user_id])
+    const tags = await db.get("SELECT * FROM tags WHERE user_id = (?)",[user_id])
 
     await db.close()
     

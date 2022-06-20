@@ -27,9 +27,9 @@ class UsersController {
     const db = await sqliteConnection()
 
     const { name, email, password, avatar, old_password } = req.body
-    const { id } = req.params
+    const { user_id } = req.body
 
-    const user = await db.get("SELECT * FROM users WHERE id = (?)", [id])
+    const user = await db.get("SELECT * FROM users WHERE id = (?)", [user_id])
 
     if (!user) {
       await db.close()
@@ -38,7 +38,7 @@ class UsersController {
 
     const userWithNewEmail = await db.get("SELECT * FROM users WHERE email = (?)", [email])
 
-    if (userWithNewEmail && userWithNewEmail.id === id) {
+    if (userWithNewEmail && userWithNewEmail.id !== user_id) {
       await db.close()
       throw new AppError("Email já está em uso")
     }
@@ -62,7 +62,7 @@ class UsersController {
     user.email = email ?? user.email
     user.avatar = avatar ?? user.avatar
 
-    await db.run("UPDATE users SET name = ?, email = ?, password = ?, avatar = ?, updated_at = DATETIME('now')  WHERE id = ?", [user.name, user.email, user.password, user.avatar, id])
+    await db.run("UPDATE users SET name = ?, email = ?, password = ?, avatar = ?, updated_at = DATETIME('now')  WHERE id = ?", [user.name, user.email, user.password, user.avatar, user_id])
     await db.close()
 
 

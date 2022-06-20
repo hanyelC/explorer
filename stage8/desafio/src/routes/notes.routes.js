@@ -1,9 +1,14 @@
 const { Router } = require("express")
+
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated")
+
 const NotesController = require("../controllers/NotesController")
 
 const notesRouter = Router()
 
 const notesController = new NotesController()
+
+notesRouter.use(ensureAuthenticated)
 
 notesRouter.get('/', notesController.index)
 notesRouter.get('/:note_id', notesController.show)

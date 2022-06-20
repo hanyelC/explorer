@@ -1,2 +1,4 @@
 node_modules
 database.db
+nodemon.json
+.vscode

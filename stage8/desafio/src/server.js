@@ -1,5 +1,6 @@
 const express = require("express")
 require("express-async-errors")
+const cors = require("cors")
 
 const routes = require("./routes")
 
@@ -9,7 +10,7 @@ const AppError = require("./utils/AppError")
 migrationsRun()
 
 const app = express()
-
+app.use(cors())
 app.use(express.json())
 
 app.use(routes)

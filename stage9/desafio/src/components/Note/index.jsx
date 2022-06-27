@@ -27,8 +27,8 @@ export function Note({title, to, rating, description, tags, ...rest}) {
        <p>{ description }</p>
 
        {
-         tags.map(title => (
-          <Tag title={title}/>
+         tags.map(tag => (
+          <Tag title={tag.name}/>
         ))
        }
     </Container>

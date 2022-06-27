@@ -10,12 +10,24 @@ class NotesController {
     if(!user_id) throw new AppError("Forneça um id de usuário válido")
 
     const notes = await db.all("SELECT * FROM notes WHERE user_id = (?) ", [user_id])
+ 
+    if(notes.length === 0) throw new AppError("Nenhuma nota encontrada", 404)
+    
+    const tags = await db.all("SELECT * FROM tags WHERE user_id = (?)",[user_id])
+    
+    const notesWithTags = notes.map(note => {
+      
+      const noteTags = tags.filter(tag => tag.note_id === note.id)
+      
+      return {
+        ...note,
+        tags: noteTags
+      }
+    })
 
     await db.close()
 
-    if(notes.length === 0) throw new AppError("Nenhuma nota encontrada", 404)
-
-    return res.json(notes)
+    return res.json(notesWithTags)
   }
 
   async create(req, res) {

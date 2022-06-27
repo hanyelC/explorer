@@ -1,4 +1,4 @@
-import { createContext, useContext, useState} from "react"
+import { createContext, useContext, useState, useEffect} from "react"
 
 import { api } from "../services/api"
 
@@ -27,6 +27,13 @@ export function AuthProvider({ children }) {
 
   }
 
+  useEffect(()=> {
+    const user = JSON.parse(localStorage.getItem("@rocketmovies:user"))
+    const token = localStorage.getItem("@rocketmovies:token")
+
+    setData({ user, token})
+  }, [])
+  
   return (
 
     <AuthContext.Provider value={{

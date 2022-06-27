@@ -16,9 +16,7 @@ class NotesController {
     const tags = await db.all("SELECT * FROM tags WHERE user_id = (?)",[user_id])
     
     const notesWithTags = notes.map(note => {
-      
       const noteTags = tags.filter(tag => tag.note_id === note.id)
-      
       return {
         ...note,
         tags: noteTags
@@ -66,11 +64,23 @@ class NotesController {
 
     const note = await db.get("SELECT * FROM notes WHERE id = (?)", [note_id])
 
-    await db.close()
-    
     if(!note) throw new AppError("Nota não encontrada", 404)
+    
+    const user = await db.get("SELECT * FROM users WHERE id = (?)",[note.user_id])
+    
+    const tags = await db.all("SELECT * FROM tags WHERE note_id = (?)", [note_id])
+    
+    await db.close()
 
-    return res.json(note)
+    const noteTags = tags.filter(tag => String(tag.note_id) === note_id)
+
+    const noteData = {
+      note,
+      userData: user,
+      tags: noteTags
+    }
+
+    return res.json(noteData)
   }
 
   async update(req, res) {

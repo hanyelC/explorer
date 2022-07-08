@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import { FiArrowLeft } from "react-icons/fi"
 
@@ -20,6 +21,8 @@ export function New() {
   const [tags, setTags] = useState([])
   const [newTag, setNewTag] = useState("")
 
+  const navigate = useNavigate()
+
   async function handleSaveNote(e){
     e.preventDefault()
     if(!title)
@@ -39,6 +42,9 @@ export function New() {
         tags
       })
 
+      alert("Nota criada com sucesso")
+      navigate("/")
+      
     } catch (error) {
       if(error.response){
         alert(error.response.data.message)
@@ -64,6 +70,11 @@ export function New() {
 
   function removeTag(deleted){
     setTags(tags.filter( tag => deleted != tag))
+  }
+
+  async function handleDeleteNote() {
+    // TODO: implement: delete note function
+    navigate("/")
   }
   
   return (
@@ -117,7 +128,10 @@ export function New() {
         </Tags>
 
         <footer>
-          <Button title="Excluir filme" />
+          <Button
+            title="Excluir filme"
+            onClick={handleDeleteNote}
+          />
           <Button
             title="Salvar alterações"
             onClick={handleSaveNote}

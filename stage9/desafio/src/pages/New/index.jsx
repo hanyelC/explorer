@@ -14,7 +14,7 @@ import { NoteTag } from "../../components/NoteTag"
 import { Container, Content, Tags } from "./styles"
 
 export function New() {
-  const [title, setTitle] = useState([])
+  const [title, setTitle] = useState("")
   const [rating, setRating] = useState(null)
   const [description, setDescription] = useState("")
   const [tags, setTags] = useState([])
@@ -22,18 +22,23 @@ export function New() {
 
   async function handleSaveNote(e){
     e.preventDefault()
+    if(!title)
+      return alert("O campo título é obrigatório")
     
+    if(!rating)
+      return alert("A nota é obrigatória")
+      
     const token = localStorage.getItem("@rocketmovies:token")
     api.defaults.headers.authorization = `Bearer ${token}`
 
     try {
-      const response = await api.post("/notes", {
+      await api.post("/notes", {
         title,
         description,
         rating,
         tags
       })
-      console.log(response)
+
     } catch (error) {
       if(error.response){
         alert(error.response.data.message)

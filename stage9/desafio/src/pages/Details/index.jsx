@@ -33,11 +33,16 @@ export function Details() {
       const { data } = await api.get(`/notes/${id}`)
 
       setNoteData(data)
-      console.log(data.tags)
       
     } catch (error) {
-      if(error.response) console.log(error.response.data.message)
-      else console.log(error)
+      if(error.response) {
+        alert(error.response.data.message)
+        console.log(error.response.data.message)
+      }
+      else {
+        alert('Algo deu errado, não foi possível acessar os dados da nota')
+        console.log(error)
+      }
     }
   }
   

@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import { FiArrowLeft, FiPlus, FiX } from "react-icons/fi"
+import { FiArrowLeft } from "react-icons/fi"
 
 import { api } from "../../services/api"
 
@@ -9,8 +9,9 @@ import { TextArea } from "../../components/TextArea"
 import { Input } from "../../components/Input"
 import { ButtonText } from "../../components/ButtonText"
 import { Button } from "../../components/Button"
+import { NoteTag } from "../../components/NoteTag"
 
-import { Container, Content, Tags, Tag } from "./styles"
+import { Container, Content, Tags } from "./styles"
 
 export function New() {
   const [title, setTitle] = useState([])
@@ -44,6 +45,21 @@ export function New() {
     }
   }
 
+  function addTag(){
+    if(newTag.trim().length === 0)
+      return
+    
+    if(tags.includes(newTag.trim()))
+      return alert("Marcador já existente")
+    
+    setTags(prevState => [...prevState, newTag.trim()])
+
+    setNewTag("")
+  }
+
+  function removeTag(deleted){
+    setTags(tags.filter( tag => deleted != tag))
+  }
   
   return (
     <Container>
@@ -74,10 +90,24 @@ export function New() {
         <Tags>
           <p>Marcadores</p>
           <div>
-            <Tag>
-              Ação <FiX/>
-            </Tag>
-            <Tag isNew> Novo marcador <FiPlus /></Tag>
+            {
+              tags.map(tag => (
+                <NoteTag
+                  key={tag}
+                  value={tag}
+                  onClick={()=> removeTag(tag)}
+                />
+              ))
+            }
+
+            <NoteTag
+              placeholder="Novo marcador"
+              isNew
+              onClick={addTag}
+              onChange={e => setNewTag(e.target.value)}
+              value={newTag}
+            />
+                     
           </div>
         </Tags>
 

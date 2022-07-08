@@ -69,6 +69,7 @@ export const Tags = styled.section`
 
  & > div {
     display: flex;
+    flex-wrap: wrap;
     gap: 2.4rem;
     padding: 1.6rem;
 
@@ -76,23 +77,4 @@ export const Tags = styled.section`
 
     background-color: ${({ theme }) => theme.COLORS.BG_DARK};
  }
-`
-
-export const Tag = styled.span`
-  display: flex;
-  align-items: center;
-  gap: 1.6rem;
-  padding: 1.6rem;
-
-  background-color: ${({ theme, isNew }) => isNew ? "transparent" : theme.COLORS.BG_LIGHT};
-  border: ${({ theme, isNew}) => isNew ? `2px dashed ${theme.COLORS.GRAY}` : "none"};
-
-  border-radius: 10px;
-
-  & > svg {
-    font-size: 2.4rem;
-    color: ${({ theme }) => theme.COLORS.PINK};
-  }
-
-  color: ${({ theme, isNew }) =>isNew ? theme.COLORS.GRAY : theme.COLORS.WHITE};  
 `

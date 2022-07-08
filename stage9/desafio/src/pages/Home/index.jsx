@@ -18,15 +18,20 @@ export function Home() {
   async function fetchNotes() {
     const token = localStorage.getItem("@rocketmovies:token")
     api.defaults.headers.authorization = `Bearer ${token}`
-    console.log('fetching notes')
+    
     try {
       const response = await api.get("/notes")
 
       setNotes(response.data)
-      console.log(response.data)
 
     } catch (error) {
-      console.log(error.response.data.message)
+      if(error.response){
+        alert(error.response.data.message)
+        console.log(error.response.data.message)
+      } else {
+        alert("Algo deu errado")
+        console.log(error)
+      }
     }
   }
 

@@ -17,8 +17,8 @@ class NotesController {
       const search = titleSearch.split(" ").filter(item => item != "").map(item => item.toLowerCase())
 
       filteredNotes = notes.filter(note => {
-        for(let item of search) {
-          if(!note.title.toLowerCase().includes(item))
+        for (let item of search) {
+          if (!note.title.toLowerCase().includes(item))
             return false
         }
         return true

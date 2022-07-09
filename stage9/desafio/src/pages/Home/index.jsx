@@ -15,17 +15,17 @@ import { api } from "../../services/api"
 export function Home() {
   const [notes, setNotes] = useState([])
 
-  async function fetchNotes() {
+  async function fetchNotes(title = "") {
     const token = localStorage.getItem("@rocketmovies:token")
     api.defaults.headers.authorization = `Bearer ${token}`
-    
+
     try {
-      const response = await api.get("/notes")
+      const response = await api.get("/notes", { params: { titleSearch: title } })
 
       setNotes(response.data)
 
     } catch (error) {
-      if(error.response){
+      if (error.response) {
         alert(error.response.data.message)
         console.log(error.response.data.message)
       } else {
@@ -41,7 +41,7 @@ export function Home() {
 
   return (
     <Container>
-      <Header />
+      <Header onSearch={fetchNotes} />
       <Content >
         <header>
           <h2>Meus filmes</h2>

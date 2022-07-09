@@ -23,6 +23,8 @@ class NotesController {
         }
         return true
       })
+    } else {
+      filteredNotes = notes
     }
 
     if (filteredNotes.length === 0) throw new AppError("Nenhuma nota encontrada", 404)

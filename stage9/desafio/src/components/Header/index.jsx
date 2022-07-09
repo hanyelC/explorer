@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
 
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg"
+
 import { Input } from "../Input"
 
 import { Container } from "./styles"
@@ -8,6 +10,8 @@ import { useAuth } from "../../hooks/auth"
 export function Header() {
   const { signOut, user } = useAuth()
 
+  const avatarUrl = user.avatar ? user.avatar : avatarPlaceholder
+  
   function handleSignOut() {
     if(confirm("Deseja realmente sair?"))
       signOut()
@@ -25,7 +29,7 @@ export function Header() {
         <p>{user.name}</p>
         <button onClick={handleSignOut}>sair</button>
         </div>
-        <Link to="/profile"><img src="https://github.com/hanyelc.png" alt="" /></Link>
+        <Link to="/profile"><img src={avatarUrl} alt="" /></Link>
       </div>
 
     </Container>

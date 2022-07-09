@@ -46,12 +46,14 @@ export const Container = styled.div`
     font-weight: 700;
   } 
 
-  & span {
+  & button {
     align-self: end;
 
     font-size: 1.4rem;
     font-weight: 400;
     color: ${({ theme }) => theme.COLORS.GRAY};
+    background-color: transparent;
+    border: none;
   }
 
   & img {

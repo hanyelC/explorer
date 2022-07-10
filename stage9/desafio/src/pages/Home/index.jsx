@@ -26,6 +26,9 @@ export function Home() {
 
     } catch (error) {
       if (error.response) {
+        if (error.response.status === 404)
+          return setNotes([])
+
         alert(error.response.data.message)
         console.log(error.response.data.message)
       } else {
@@ -51,7 +54,7 @@ export function Home() {
         <Notes>
 
           {
-            notes
+            notes.length > 0
               ? notes.map(note => (
                 <Note
                   key={String(note.id)}

@@ -7,6 +7,16 @@ const AuthContext = createContext({})
 export function AuthProvider({ children }) {
   const [data, setData ] = useState({})
 
+  async function signUp(name, email, password){
+    try {
+      await api.post("/users",{ name, email, password})
+    } catch (error) {
+      console.log(error)
+      if(error.response)
+        alert(error.response.data.message)
+    }
+  }
+  
   async function signIn(email, password){
 
     try {
@@ -43,6 +53,7 @@ export function AuthProvider({ children }) {
   return (
 
     <AuthContext.Provider value={{
+      signUp,
       signIn,
       signOut,
       user: data.user

@@ -22,7 +22,10 @@ export function SignUp() {
     if(!name) return alert("O campo nome é obrigatório")
     if(!email) return alert("O campo email é obrigatório")
     if(!password) return alert("O campo senha é obrigatório")
-    
+
+    if(!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) 
+      return alert("Formato de email inválido")
+
     try {
       await signUp(name, email, password)    
     } catch (error) {

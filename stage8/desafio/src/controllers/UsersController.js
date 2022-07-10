@@ -4,10 +4,13 @@ const AppError = require("../utils/AppError")
 
 class UsersController {
   async create(req, res) {
-    const db = await sqliteConnection()
-
     const { name, email, password, avatar } = req.body
+    
+    if(!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
+      throw new AppError("Formato de email inválido")  
 
+    const db = await sqliteConnection()
+    
     const checkIfUserExists = await db.get("SELECT * FROM users WHERE email = (?)", [email])
 
     if (checkIfUserExists) {

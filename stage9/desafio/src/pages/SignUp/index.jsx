@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { FiMail, FiLock, FiUser, FiArrowLeft } from "react-icons/fi"
 
 import { useAuth } from "../../hooks/auth"
@@ -14,20 +15,24 @@ export function SignUp() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  const navigate = useNavigate()
+
   const { signUp } = useAuth()
 
   async function handleSignUp(e) {
     e.preventDefault()
 
-    if(!name) return alert("O campo nome é obrigatório")
-    if(!email) return alert("O campo email é obrigatório")
-    if(!password) return alert("O campo senha é obrigatório")
+    if (!name) return alert("O campo nome é obrigatório")
+    if (!email) return alert("O campo email é obrigatório")
+    if (!password) return alert("O campo senha é obrigatório")
 
-    if(!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) 
+    if (!email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/))
       return alert("Formato de email inválido")
 
     try {
-      await signUp(name, email, password)    
+      await signUp(name, email, password)
+      alert("Conta criada com sucesso")
+      navigate("/")
     } catch (error) {
       console.log(error)
     }
@@ -58,7 +63,7 @@ export function SignUp() {
           icon={FiLock}
           placeholder="Senha"
           type="password"
-          onChange={e => setPassword(e.target.value )}
+          onChange={e => setPassword(e.target.value)}
         />
 
         <Button

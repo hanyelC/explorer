@@ -11,7 +11,6 @@ import { Container, Content, Notes } from "./styles"
 import { Note } from "../../components/Note"
 import { api } from "../../services/api"
 
-
 export function Home() {
   const [notes, setNotes] = useState([])
 
@@ -30,10 +29,8 @@ export function Home() {
           return setNotes([])
 
         alert(error.response.data.message)
-        console.log(error.response.data.message)
       } else {
         alert("Algo deu errado")
-        console.log(error)
       }
     }
   }

@@ -31,7 +31,8 @@ export function AuthProvider({ children }) {
       setData({ user, token})
       
     } catch(error) {
-      if(error.response) alert(error.response.data.message)
+      console.log(error)
+      if(error.response.data.message) alert(error.response.data.message)
       else alert("Algo deu errado")
     }
 

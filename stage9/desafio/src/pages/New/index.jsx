@@ -23,14 +23,14 @@ export function New() {
 
   const navigate = useNavigate()
 
-  async function handleSaveNote(e){
+  async function handleSaveNote(e) {
     e.preventDefault()
-    if(!title)
+    if (!title)
       return alert("O campo título é obrigatório")
-    
-    if(!rating)
+
+    if (!rating)
       return alert("A nota é obrigatória")
-      
+
     const token = localStorage.getItem("@rocketmovies:token")
     api.defaults.headers.authorization = `Bearer ${token}`
 
@@ -44,9 +44,9 @@ export function New() {
 
       alert("Nota criada com sucesso")
       navigate("/")
-      
+
     } catch (error) {
-      if(error.response){
+      if (error.response) {
         alert(error.response.data.message)
         console.log(error.response.data.message)
       } else {
@@ -56,27 +56,34 @@ export function New() {
     }
   }
 
-  function addTag(){
-    if(newTag.trim().length === 0)
+  function addTag() {
+    if (newTag.trim().length === 0)
       return
-    
-    if(tags.includes(newTag.trim()))
+
+    if (tags.includes(newTag.trim()))
       return alert("Marcador já existente")
-    
+
     setTags(prevState => [...prevState, newTag.trim()])
 
     setNewTag("")
   }
 
-  function removeTag(deleted){
-    setTags(tags.filter( tag => deleted != tag))
+  function removeTag(deleted) {
+    setTags(tags.filter(tag => deleted != tag))
   }
 
   async function handleDeleteNote() {
     // TODO: implement: delete note function
     navigate("/")
   }
-  
+
+  function validateRatingInput(e) {
+    if (e.target.value.length >= 1 || !/[0-5]/.test(e.key)) {
+      e.returnValue = false
+      e.preventDefault()
+    }
+  }
+
   return (
     <Container>
       <Header />
@@ -93,6 +100,10 @@ export function New() {
             onChange={e => setTitle(e.target.value)}
           />
           <Input
+            type="number"
+            max="5"
+            min="0"
+            onKeyPress={validateRatingInput}
             placeholder="Sua nota (de 0 a 5)"
             onChange={e => setRating(Number(e.target.value))}
           />
@@ -111,7 +122,7 @@ export function New() {
                 <NoteTag
                   key={tag}
                   value={tag}
-                  onClick={()=> removeTag(tag)}
+                  onClick={() => removeTag(tag)}
                 />
               ))
             }
@@ -123,7 +134,7 @@ export function New() {
               onChange={e => setNewTag(e.target.value)}
               value={newTag}
             />
-                     
+
           </div>
         </Tags>
 

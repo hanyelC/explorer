@@ -22,6 +22,7 @@ export const Container = styled.div`
     
     background-color: transparent;
     border: none;
+    width: 100%;
     
     color: ${({ theme }) => theme.COLORS.GRAY_LIGHT};
   }

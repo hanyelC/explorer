@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { useAuth } from "../../hooks/auth"
 import { api } from "../../services/api"
@@ -12,11 +12,15 @@ import { Container } from "./styles"
 export function Header({ onSearch }) {
   const { signOut, user } = useAuth()
 
+  const navigate = useNavigate()
+
   const avatarUrl = user.avatar ? `${api.defaults.baseURL}/files/${user.avatar}` : avatarPlaceholder
 
   function handleSignOut() {
-    if (confirm("Deseja realmente sair?"))
+    if (confirm("Deseja realmente sair?")) {
       signOut()
+      navigate("/")
+    }
   }
 
   return (

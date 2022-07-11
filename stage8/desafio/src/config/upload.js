@@ -10,13 +10,13 @@ const MULTER = {
     filename(req, file, cb) {
       const uniquePrefix = Date.now() + '-' + Math.round(Math.random() * 1E9)
       const fileName = `${uniquePrefix}-${file.originalname}`
-    
+
       cb(null, fileName)
     }
   })
 }
-  
-  module.exports = {
+
+module.exports = {
   TMP_FOLDER,
   UPLOADS_FOLDER,
   MULTER

@@ -44,6 +44,49 @@ export function AuthProvider({ children }) {
     setData({})
   }
 
+  async function updateProfile({ user, avatarFile }) {
+    api.defaults.headers.authorization = `Bearer ${localStorage.getItem("@rocketmovies:token")}`
+
+    if (avatarFile) {
+      try {
+        const fileUploadForm = new FormData()
+        fileUploadForm.append("avatar", avatarFile)
+
+        const response = await api.patch("/users/avatar", fileUploadForm)
+        const { avatar } = response.data
+
+        user.avatar = avatar
+
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    try {
+
+      console.log(user.email)
+      await api.put("/users", user)
+      alert("perfil atualizado com sucesso")
+    } catch (error) {
+      console.log(error)
+      if (error.response.data.message)
+        return alert(error.response.data.message)
+      else
+        alert("Algo deu errado")
+    }
+
+    const newUserData = JSON.parse(localStorage.getItem("@rocketmovies:user"))
+
+    newUserData.avatar = user.avatar ?? newUserData.avatar
+    newUserData.name = user.name ?? newUserData.name
+    newUserData.email = user.email ?? newUserData.email
+    delete newUserData.password
+
+    localStorage.setItem("@rocketmovies:user", JSON.stringify(newUserData))
+
+    setData({ user: newUserData, token: data.token })
+  }
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("@rocketmovies:user"))
     const token = localStorage.getItem("@rocketmovies:token")
@@ -57,6 +100,7 @@ export function AuthProvider({ children }) {
       signUp,
       signIn,
       signOut,
+      updateProfile,
       user: data.user
     }}
     >

@@ -63,8 +63,6 @@ export function AuthProvider({ children }) {
     }
 
     try {
-
-      console.log(user.email)
       await api.put("/users", user)
       alert("perfil atualizado com sucesso")
     } catch (error) {

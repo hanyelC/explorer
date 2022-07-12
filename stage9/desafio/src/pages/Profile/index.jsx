@@ -33,7 +33,7 @@ export function Profile() {
       old_password: oldPassword,
       password: newPassword
     }
-    
+
     updateProfile({ user: updatedUser, avatarFile })
   }
 

@@ -12,10 +12,9 @@ async function ensureAuthenticated(req, res, next) {
 
   try {
     const { sub } = verify(token, authConfig.jwt.secret)
-    const { user_id, email} = JSON.parse(sub)
-    
+    const { user_id } = JSON.parse(sub)
+
     req.body.user_id = user_id
-    req.body.email = email
 
     return next()
   } catch {

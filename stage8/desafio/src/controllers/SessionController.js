@@ -24,8 +24,7 @@ class SessionController {
     const { secret, expiresIn } = authConfig.jwt
 
     const subject = JSON.stringify({
-      user_id: user.id,
-      email: user.email
+      user_id: user.id
     })
 
     const token = sign({}, secret, {

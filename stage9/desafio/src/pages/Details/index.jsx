@@ -6,6 +6,8 @@ import { IoStarOutline, IoStar } from "react-icons/io5"
 
 import { api } from "../../services/api"
 
+import avatarPlaceholder from "../../assets/avatar_placeholder.svg"
+
 import { Header } from "../../components/Header"
 import { ButtonText } from "../../components/ButtonText"
 import { Tag } from "../../components/Tag"
@@ -14,12 +16,15 @@ import { Container, Content, Rating, Info, Tags, Description } from "./styles"
 
 export function Details() {
   const [noteData, setNoteData] = useState({})
+
   const { id } = useParams()
-  
+
+  const avatarUrl = noteData.userData && noteData.userData.avatar ? `${api.defaults.baseURL}/files/${noteData.userData.avatar}` : avatarPlaceholder
+
   const stars = []
 
-  if(noteData.note) {
-    for(let i= 0; i < 5; i++){
+  if (noteData.note) {
+    for (let i = 0; i < 5; i++) {
       let star = i < noteData.note.rating ? IoStar : IoStarOutline
       stars.push(star)
     }
@@ -28,14 +33,14 @@ export function Details() {
   async function fetchNoteData() {
     const token = localStorage.getItem("@rocketmovies:token")
     api.defaults.headers.authorization = `Bearer ${token}`
-      
+
     try {
       const { data } = await api.get(`/notes/${id}`)
 
       setNoteData(data)
-      
+
     } catch (error) {
-      if(error.response) {
+      if (error.response) {
         alert(error.response.data.message)
         console.log(error.response.data.message)
       }
@@ -45,16 +50,15 @@ export function Details() {
       }
     }
   }
-  
-  
+
   useEffect(() => {
     fetchNoteData()
   }, [])
-  
+
   return (
     <Container>
       <Header />
-      { noteData.note ?
+      {noteData.note ?
         <Content>
           <header>
             <ButtonText icon={FiArrowLeft} title="Voltar" to="/" />
@@ -62,23 +66,23 @@ export function Details() {
             <div>
               <h2>{noteData.note.title}</h2>
               <Rating>
-                { stars.length > 0 ?
+                {stars.length > 0 ?
 
-                  
+
                   stars.map((Star, index) => {
                     return (
                       <Star key={index} />
                     )
-                  }) 
-                  
-                    :
+                  })
+
+                  :
                   <></>
                 }
               </Rating>
             </div>
 
             <Info>
-              <img src={noteData.userData.avatar} alt="" />
+              <img src={avatarUrl} alt="Imagem de perfil do usuário que criou a nota" />
               <p>Por {noteData.userData.name}</p>
               <FiClock />
               <span>04/06/2022 às 12:00</span>
@@ -89,8 +93,8 @@ export function Details() {
             {
               noteData.tags.map(tag => (
                 <Tag
-                 key={tag.id}
-                 title={tag.name}
+                  key={tag.id}
+                  title={tag.name}
                 />
               ))
             }

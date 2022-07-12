@@ -7,7 +7,7 @@ export const Container = styled.div`
   grid-template-rows: 11.6rem auto;
   grid-template-areas:
   "header"
-  "content" ;
+  "content";
 
   overflow-y: hidden;
 `
@@ -15,7 +15,8 @@ export const Container = styled.div`
 export const Content = styled.div`
   grid-area: content;
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 4rem;
   margin: 4rem 11.5rem;
 
@@ -55,7 +56,7 @@ export const Rating = styled.div`
 
   & > svg {
     font-size: 2rem;
-    color: ${({ theme}) => theme.COLORS.PINK}
+    color: ${({ theme }) => theme.COLORS.PINK}
   }
 `
 
@@ -75,11 +76,10 @@ export const Info = styled.div`
   }
 
   & > svg {
-    color: ${({ theme}) => theme.COLORS.PINK}
+    color: ${({ theme }) => theme.COLORS.PINK}
   }
 `
 
 export const Tags = styled.div``
 
-export const Description = styled.div`
-`
+export const Description = styled.div``

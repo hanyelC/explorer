@@ -50,7 +50,17 @@ export default createGlobalStyle`
     border-radius: 0.8rem;
   }
 
-  ::-webkit-scrollbar-thumb:hover  {
-    background: ${({ theme }) => theme.COLORS.PINK_HOVER};
-  }
+::-webkit-scrollbar-thumb:hover  {
+  background: ${({ theme }) => theme.COLORS.PINK_HOVER};
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
 `

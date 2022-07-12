@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { format } from "date-fns"
 
 import { FiClock, FiArrowLeft } from "react-icons/fi"
 import { IoStarOutline, IoStar } from "react-icons/io5"
@@ -85,7 +86,7 @@ export function Details() {
               <img src={avatarUrl} alt="Imagem de perfil do usuário que criou a nota" />
               <p>Por {noteData.userData.name}</p>
               <FiClock />
-              <span>04/06/2022 às 12:00</span>
+              <span>{format(new Date(noteData.note.created_at), "dd/MM/yyyy 'às' HH:mm")}</span>
             </Info>
           </header>
 

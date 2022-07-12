@@ -39,8 +39,10 @@ export const Avatar = styled.div`
 
   margin: -93px auto 0;
   width: 18.6rem;
+
   & > img {
     width: 186px;
+    height: 186px;
     border-radius: 50%;
   }
 

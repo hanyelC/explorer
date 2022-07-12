@@ -29,7 +29,7 @@ class UsersController {
   async update(req, res) {
     const db = await sqliteConnection()
 
-    const { name, email, password, avatar, old_password } = req.body
+    const { name, email, password, old_password } = req.body
     const { user_id } = req.body
 
     const user = await db.get("SELECT * FROM users WHERE id = (?)", [user_id])
@@ -63,13 +63,12 @@ class UsersController {
 
     user.name = name ?? user.name
     user.email = email ?? user.email
-    user.avatar = avatar ?? user.avatar
 
-    await db.run("UPDATE users SET name = ?, email = ?, password = ?, avatar = ?, updated_at = DATETIME('now')  WHERE id = ?", [user.name, user.email, user.password, user.avatar, user_id])
+    await db.run("UPDATE users SET name = ?, email = ?, password = ?, updated_at = DATETIME('now')  WHERE id = ?", [user.name, user.email, user.password, user_id])
     await db.close()
 
 
-    return res.json()
+    return res.status(204).json({})
 
   }
 }

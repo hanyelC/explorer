@@ -4,6 +4,7 @@ const sqliteConnection = require("../database/sqlite")
 class UserAvatarController {
   async update(req, res) {
     const { user_id } = req.body
+    const { filename } = req.file
 
     const diskStorage = new DiskStorage()
     const db = await sqliteConnection()
@@ -13,12 +14,12 @@ class UserAvatarController {
     if (user.avatar)
       diskStorage.deleteFile(user.avatar)
 
-    const file = diskStorage.saveFile(req.file.filename)
+    const file = diskStorage.saveFile(filename)
 
     if (file)
-      await db.run("UPDATE users SET avatar = ? WHERE id = ?", [req.file.filename, user_id])
+      await db.run("UPDATE users SET avatar = ? WHERE id = ?", [filename, user_id])
 
-    res.json({ "filename": req.file.filename })
+    res.json({ "avatar": filename })
   }
 }
 

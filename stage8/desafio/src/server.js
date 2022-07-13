@@ -1,5 +1,6 @@
-const express = require("express")
 require("express-async-errors")
+require("dotenv/config")
+const express = require("express")
 const cors = require("cors")
 
 const { UPLOADS_FOLDER } = require("./config/upload")
@@ -35,4 +36,4 @@ app.use((err, req, res, next) => {
   })
 })
 
-app.listen(3030, console.log('server running on port 3030'))
+app.listen(process.env.PORT || 3030, console.log('server running on port 3030'))

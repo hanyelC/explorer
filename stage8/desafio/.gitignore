@@ -3,3 +3,4 @@ database.db
 nodemon.json
 .vscode
 uploads
+.env

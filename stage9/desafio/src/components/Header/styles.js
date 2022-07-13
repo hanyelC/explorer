@@ -60,5 +60,6 @@ export const Container = styled.div`
     width: 6.4rem;
     height: 6.4rem;
     border-radius: 50%;
+    object-fit: cover;
   }
 `

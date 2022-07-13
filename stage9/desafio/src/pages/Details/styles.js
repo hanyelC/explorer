@@ -73,6 +73,7 @@ export const Info = styled.div`
     height: 1.6rem;
     width: 1.6rem;
     border-radius: 50%;
+    object-fit: cover;
   }
 
   & > svg {
